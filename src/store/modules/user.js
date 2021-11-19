@@ -33,7 +33,14 @@ const actions = {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
-        const { data } = response
+
+        // fix for djangosimpleJWT
+        const {access: token, refresh} = response.data
+        const data = {token, refresh}
+
+        // origin for vue-element-admin
+        // const { data } = response
+
         commit('SET_TOKEN', data.token)
         setToken(data.token)
         resolve()
@@ -48,12 +55,11 @@ const actions = {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
         const { data } = response
-
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
 
-        const { name, avatar } = data
+        const { username:name, avatar } = data
 
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
