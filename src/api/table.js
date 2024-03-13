@@ -1,8 +1,17 @@
 import request from '@/utils/request'
 
-export function getList(params) {
+export function getMemberList(params) {
   return request({
     url: '/users/',
+    method: 'get',
+    params
+  })
+}
+
+
+export function getProgramList(params) {
+  return request({
+    url: '/programs/',
     method: 'get',
     params
   })

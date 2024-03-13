@@ -13,19 +13,24 @@
           {{ scope.$index }}
         </template>
       </el-table-column>
-      <el-table-column label="用户名" width="110" align="center">
+      <el-table-column label="名称" width="110" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.username }}</span>
+          <span>{{ scope.row.name }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="邮箱" align="center">
+      <el-table-column label="更新时间" align="center">
         <template slot-scope="scope">
-          {{ scope.row.email }}
+          {{ scope.row.update_time }}
         </template>
       </el-table-column>
       <el-table-column label="创建时间" align="center">
         <template slot-scope="scope">
-          {{ scope.row.date_joined }}
+          {{ scope.row.create_time }}
+        </template>
+      </el-table-column>
+      <el-table-column label="是否删除" align="center">
+        <template slot-scope="scope">
+          {{ scope.row.is_delete ? "已删除" : "未删除" }}
         </template>
       </el-table-column>
 <!--      <el-table-column class-name="status-col" label="Status" width="110" align="center">-->
@@ -44,7 +49,8 @@
 </template>
 
 <script>
-import { getList } from '@/api/table'
+import { getProgramList } from '@/api/table'
+// import { getMemberList } from '@/api/table'
 
 export default {
   filters: {
@@ -69,7 +75,8 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      getList().then(response => {
+      getProgramList().then(response => {
+      // getMemberList().then(response => {
         this.list = response.data.results
         this.listLoading = false
       })
