@@ -149,6 +149,35 @@ export const constantRoutes = [
     ]
   },
 
+
+  {
+    path: '/programs',
+    component: Layout,
+    name: 'Program',
+    redirect: '/programs/index',
+    meta: { title: 'Program', icon: 'el-icon-s-order' },
+    children: [
+      {
+        path: 'index',
+        name: 'Programs',
+        component: () => import('@/views/programs/index'),
+        meta: { title: 'Program List', icon: 'el-icon-location-outline' }
+      },
+      {
+        path: 'create',
+        name: 'Create',
+        component: () => import('@/views/programs/create/index'),
+        meta: { title: 'Create Program', icon: 'el-icon-plus' }
+      },
+      {
+        path: 'craft',
+        component: () => import('@/views/programs/craft/index'),
+        hidden: true
+      },
+    ]
+  },
+
+
   {
     path: 'external-link',
     component: Layout,

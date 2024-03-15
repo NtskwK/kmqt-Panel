@@ -8,11 +8,3 @@ export function getMemberList(params) {
   })
 }
 
-
-export function getProgramList(params) {
-  return request({
-    url: '/programs/',
-    method: 'get',
-    params
-  })
-}

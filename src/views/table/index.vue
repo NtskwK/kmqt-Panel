@@ -13,19 +13,19 @@
           {{ scope.$index }}
         </template>
       </el-table-column>
-      <el-table-column label="名称" width="110" align="center">
+      <el-table-column label="用户名" width="110" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.name }}</span>
+          <span>{{ scope.row.username }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="更新时间" align="center">
+      <el-table-column label="上次活动时间" align="center">
         <template slot-scope="scope">
-          {{ scope.row.update_time }}
+          {{ scope.row.last_login }}
         </template>
       </el-table-column>
       <el-table-column label="创建时间" align="center">
         <template slot-scope="scope">
-          {{ scope.row.create_time }}
+          {{ scope.row.date_joined }}
         </template>
       </el-table-column>
       <el-table-column label="是否删除" align="center">
@@ -49,8 +49,8 @@
 </template>
 
 <script>
-import { getProgramList } from '@/api/table'
-// import { getMemberList } from '@/api/table'
+// import { getProgramList } from '@/api/table'
+import { getMemberList } from '@/api/account'
 
 export default {
   filters: {
@@ -75,11 +75,15 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      getProgramList().then(response => {
+      getMemberList().then(response => {
       // getMemberList().then(response => {
         this.list = response.data.results
         this.listLoading = false
-      })
+      }).catch(error => {
+        // 处理异常，例如显示错误信息
+        console.error('发生异常：', error)
+        // 其他异常处理逻辑
+      });
     }
   }
 }
