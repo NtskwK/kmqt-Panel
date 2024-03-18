@@ -16,9 +16,26 @@ export function getInfo(token) {
   })
 }
 
-export function logout() {
+export function getUserList(params) {
   return request({
-    url: '/logout/',
-    method: 'post'
+    url: '/users/',
+    method: 'get',
+    params
+  })
+}
+
+export function createUser(data) {
+  return request({
+    url: '/users/create/',
+    method: 'post',
+    data
+  })
+}
+
+export function activateUser(data) {
+  return request({
+    url: '/users/create/',
+    method: 'get',
+    data
   })
 }

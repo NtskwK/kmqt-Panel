@@ -50,7 +50,7 @@
 
 <script>
 // import { getProgramList } from '@/api/table'
-import { getMemberList } from '@/api/account'
+import { getUserList } from '@/api/user'
 
 export default {
   filters: {
@@ -75,7 +75,7 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      getMemberList().then(response => {
+      getUserList().then(response => {
       // getMemberList().then(response => {
         this.list = response.data.results
         this.listLoading = false
