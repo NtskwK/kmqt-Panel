@@ -8,6 +8,14 @@ export function login(data) {
   })
 }
 
+// django后端没有删除token的方法
+// export function logout() {
+//   return request({
+//     url: '/logout/',
+//     method: 'post'
+//   })
+// }
+
 export function getInfo(token) {
   return request({
     url: '/info/',

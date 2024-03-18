@@ -53,12 +53,15 @@ export default {
     },
     async logout() {
 
-      // await this.$store.dispatch('user/logout')
+      await this.$store.dispatch('user/logout')
 
-      // jwt没有封装直接删除cookie的视图
+      // 模板自带的移除token函数有问题
       // 所以利用修改过期时间手动删除本地的token
-      document.cookie = "vue_admin_template_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-      alert("退出登录成功！")
+      // document.cookie = "vue_admin_template_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+      // 已经修好了
+
+      this.$message('退出成功');
 
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     }
