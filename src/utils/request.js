@@ -73,9 +73,20 @@ service.interceptors.response.use(
     // }
   },
   error => {
-    console.log('err' + error) // for debug
+    console.log('err' + error)
+    console.log(error.response) // for debug
+
+    // 尝试打印服务器返回的信息
+    let serverMsg = error.message;
+    if (error.response.status >= 400 && error.response.status < 500)
+    {
+      serverMsg = Object.entries(error.response.data)[0][0] + ':'
+                + Object.entries(error.response.data)[0][1];
+    }
+
+
     Message({
-      message: error.message,
+      message: serverMsg,
       type: 'error',
       duration: 5 * 1000
     })
