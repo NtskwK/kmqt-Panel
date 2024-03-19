@@ -56,15 +56,20 @@ export default {
         createUser(data).then(response => {
           this.$message({
             type: 'success',
-            message: '注册信息已提交!'
+            message: '注册信息已提交!',
+            duration: 4 * 1000
           })
-          console.log(response);
-          this.$notify({
+          setTimeout(() => {
+            this.$router.push('/');
+          },3 * 1000)
+
+          setTimeout(() =>{
+            this.$notify({
               title: '提示',
-              message: '请前往链接地址激活账号！',
+              message: '请查看邮箱并根据邮件指引激活账号！',
               duration: 10 * 1000
-          });
-          this.$router.push('/');
+            });
+          },3 * 1000)
         }).catch(error => {
           console.log('error：', error)
         });}

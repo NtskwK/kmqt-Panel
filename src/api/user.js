@@ -40,10 +40,9 @@ export function createUser(data) {
   })
 }
 
-export function activateUser(data) {
+export function activateUser(uuid) {
   return request({
-    url: '/users/create/',
+    url: '/users/create/' + uuid + '/',
     method: 'get',
-    data
   })
 }
