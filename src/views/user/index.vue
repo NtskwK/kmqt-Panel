@@ -1,5 +1,16 @@
 <template>
   <div class="app-container">
+    <div class="block">
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="params.page"
+        :page-size="params.page_size"
+        layout="total, prev, pager, next, jumper"
+        :total="total"
+        hide-on-single-page="true">
+      </el-pagination>
+    </div>
     <el-table
       v-loading="listLoading"
       :data="list"
@@ -66,19 +77,34 @@ export default {
   data() {
     return {
       list: null,
-      listLoading: true
+      listLoading: true,
+      params: {
+        'page': 1,
+        'page_size': 5
+      },
+      total: 0,
     }
   },
   created() {
     this.fetchData()
   },
   methods: {
+    handleSizeChange(val) {
+      this.params.page_size = val;
+      this.fetchData()
+    },
+    handleCurrentChange(val) {
+      this.params.page = val;
+      this.fetchData()
+    },
+
     fetchData() {
       this.listLoading = true
-      getUserList().then(response => {
+      getUserList(this.params).then(response => {
       // getMemberList().then(response => {
         this.list = response.data.results
         this.listLoading = false
+        this.total = response.data.count
       }).catch(error => {
         // 处理异常，例如显示错误信息
         console.error('发生异常：', error)

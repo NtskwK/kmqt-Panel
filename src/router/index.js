@@ -76,7 +76,7 @@ export const constantRoutes = [
       {
         path: 'table',
         name: 'Table',
-        component: () => import('@/views/table/index'),
+        component: () => import('@/views/user/index.vue'),
         meta: { title: 'Table', icon: 'table' }
       },
       {

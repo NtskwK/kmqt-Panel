@@ -1,5 +1,15 @@
 <template>
   <div class="app-container">
+    <div class="block">
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="params.page"
+        :page-size="params.page_size"
+        layout="total, prev, pager, next, jumper"
+        :total="total">
+      </el-pagination>
+    </div>
     <el-table
       :data="listData"
       v-loading="listLoading"
@@ -97,7 +107,12 @@ export default {
         id: '',
         name: '',
         description: ''
-      }
+      },
+      params: {
+        'page': 1,
+        'page_size': 5
+      },
+      total: 0,
     }
   },
 
@@ -108,12 +123,21 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true;
-      getProgramList().then(response =>{
+      getProgramList(this.params).then(response =>{
         this.listData = response.data.results;
         this.listLoading = false;
-      });
+        this.total = response.data.count;
+      },);
     },
 
+    handleSizeChange(val) {
+      this.params.page_size = val;
+      this.fetchData()
+    },
+    handleCurrentChange(val) {
+      this.params.page = val;
+      this.fetchData()
+    },
 
     deleteClick(row) {
       this.$confirm('是否删除 “' + row.name + '” ?', '提示', {

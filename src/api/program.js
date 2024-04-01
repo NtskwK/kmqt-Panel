@@ -29,7 +29,7 @@ export function createProgramList(data) {
   })
 }
 
-export function  updateProgram(program_id, data) {
+export function updateProgram(program_id, data) {
   return request({
     url: '/programs/' + program_id + '/',
     method: 'patch',
